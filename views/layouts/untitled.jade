@@ -1,0 +1,26 @@
+extends ./layouts/main.pug
+
+block content
+  .menu
+    ul.nav.nav-tabs
+      li
+        .glyphicon.glyphicon-heart(href="/home")
+      li
+          a(href="/") &nbsp &nbsp Home
+      li
+        a(href="/about") &nbsp &nbsp About
+  .inner.cover
+    h1.cover-heading Twitter-clone
+    p.lead
+     | No matter your position, proper twitter clone  makes your conversation easier.
+
+    .mastfoot
+    .inner
+     p
+       | copyrights
+       | , by
+       a(href='https://twitter.com/mdo') @nidhi
+       | .
+
+   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+   script(src='js/bootstrap.min.js')

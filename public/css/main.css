@@ -1,0 +1,99 @@
+
+.glyphicon {
+    font-size: 20px;
+    color: #23527c;
+    margin-top: 10px;
+    margin-left: 800px;
+}
+.nav>li> a:hover {
+
+    color: #ffffff;
+    background-color: #23527c;
+    margin-bottom: auto;
+}
+.nav-tabs{
+  border-bottom: 2px solid #23527c;
+}
+ul{
+  margin-bottom: auto;
+  padding-bottom: 0px;
+  background-image: linear-gradient(#23527c, #ffffff);
+}
+ul li {
+  margin-top: 10px;
+   font-size: 15px;
+
+}
+
+/*.container
+{
+  border: 2px solid #f2f2f2;
+  border-style: round;
+  margin-top: 5px;
+  border-radius: 10px;
+  color: #23527c;
+}*/
+
+.form-box {
+  margin-top: 35px;
+  color: #23527c;
+}
+
+.form-top {
+  overflow: hidden;
+  padding: 0 20px 15px 25px;
+  background: #fff;
+  moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;*/
+  text-align: left;
+}
+
+.form-top-left {
+  float: left;
+  width: 75%;
+  padding-top: 25px;
+
+}
+.inner-bg {
+    padding: 100px 0 170px 0;
+}
+.form-top-left h3 { margin-top: 0; }
+
+.form-top-right {
+  float: left;
+  width: 20%;
+  padding-top: 0px;
+  margin-top: 2px;
+  font-size: 20px;
+  color: #23527c;
+/*  line-height: 100px;*/
+  text-align: right;
+}
+.form-bottom {
+  padding: 25px 25px 30px 25px;
+  background: #5884aa;
+  -moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
+  text-align: left;
+}
+
+.form-bottom form textarea {
+  height: 100px;
+}
+
+.form-bottom form button.btn {
+  width: 100%;
+  background-color: white;
+}
+
+.form-bottom form .input-error {
+  border-color: #4aaf51;
+}
+form a{
+  color: white;
+  text-decoration: underline;
+}
+form a:hover{
+  color: black;
+}
+form label{
+  color: white;
+}
