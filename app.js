@@ -31,6 +31,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'password',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 app.use('/', routes);
 app.use('/login', routes);
@@ -47,6 +53,7 @@ app.use((req, res, next) => {
 if (app.get('env') === 'development') {
   app.use((err, req, res) => {
     res.status(err.status || 500);
+    session.cookie.secure = true;
     res.render('error', {
       message: err.message,
       error: err,

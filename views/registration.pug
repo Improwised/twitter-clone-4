@@ -1,0 +1,47 @@
+extends ./layouts/main.pug
+
+block content
+  .menu
+      ul.nav.nav-tabs
+        li
+          .glyphicon.glyphicon-heart
+
+  .inner-bg
+    .container
+      .row
+        .col-sm-6.col-sm-offset-3.form-box
+          .form-top
+            .form-top-left
+             h3 Register to Twitter-Clone
+            .form-top-right
+              i.fa.fa-key.fa-4x
+          .form-bottom
+            form(action="/registration" method="POST")
+              .form-group
+                label.sr-only(for="form-username") Username
+                input.form-control(type="text" name="username" placeholder="Username...")
+              .form-group
+                label.sr-only(for="form-Email") Email
+                input.form-control(type="text" name="email" placeholder="Email...")
+              .form-group
+                label.sr-only(for="form-password") Password
+                input.form-control(type="password" name="password" placeholder="Password...")
+              .form-group
+                button.btn(type="submit") Sign in !
+                a(href="/forgot") &nbsp &nbsp Forgot Password..????
+              .form-group
+               label Already Account?
+               a(href="/") &nbsp &nbsp Sign in Now..??
+
+//- {{# if success }}
+//- <section class="success">
+//- <h2>Successful Validation</h2>
+//- </section>
+//- {{else}}
+//-   {{# if success }}
+//-     <section class="errors">
+//-       <ul>
+//-         {{# each erros }}
+//-           <li>{{this.msg}}</li>
+//-       </ul>
+

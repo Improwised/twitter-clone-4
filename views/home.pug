@@ -1,0 +1,37 @@
+extends ./layouts/main.pug
+
+block content
+  link(rel='stylesheet' href='/css/home.css')
+  .col-lg-6.col-sm-6
+    .card.hovercard
+      .card-background
+        img.card-bkimg(alt='', src='http://lorempixel.com/100/100/people/9/')
+        // http://lorempixel.com/850/280/people/9/
+      .useravatar
+        img(alt='', src='http://lorempixel.com/100/100/people/9/')
+      .card-info
+        span.card-title abcd
+    .btn-pref.btn-group.btn-group-justified.btn-group-lg(role='group', aria-label='...')
+      .btn-group(role='group')
+        button#stars.btn.btn-primary(type='submit', href='/twit', data-toggle='tab')
+          a(href="/twit")
+            span.glyphicon.glyphicon-star(aria-hidden='true')
+            .hidden-xs tweets
+      .btn-group(role='group')
+        button#favorites.btn.btn-default(type='button', href='/following', data-toggle='tab')
+          a(href="/following")
+            span.glyphicon.glyphicon-heart(aria-hidden='true')
+            .hidden-xs Following
+      .btn-group(role='group')
+        button#following.btn.btn-default(type='button', href='/followers', data-toggle='tab')
+          a(href="/followers")
+            span.glyphicon.glyphicon-user(aria-hidden='true')
+            .hidden-xs Followers
+    .well
+      .tab-content
+        #tab1.tab-pane.fade.in.active
+          h3 This is tab 1
+        //- #tab2.tab-pane.fade.in
+        //-   h3 This is tab 2
+        //- #tab3.tab-pane.fade.in
+        //-   h3 This is tab 3

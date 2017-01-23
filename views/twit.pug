@@ -1,0 +1,22 @@
+extends ./layouts/main.pug
+
+block content
+  link(rel='stylesheet' href='/css/twit.css')
+  .menu
+      ul.nav.nav-tabs
+        li
+          .glyphicon.glyphicon-heart
+        li
+          a(href="/home") Home
+        li
+          a(href="/profile") Profile
+  .container
+    .row
+      .col-sm-6
+        .form-button
+          form(action="/twit" method="POST")
+            .form-group
+              label.sr-only(for="form-username") Username
+              input.form-control(type="text" name="username" placeholder="What's happen...")
+        .form-group
+                button.btn(type="submit") Tweet !!
