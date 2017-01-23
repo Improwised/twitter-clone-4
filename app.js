@@ -5,6 +5,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const expressValidator = require('express-validator');
+const expressSession = require('express-Session');
 
 // Load dotenv config
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -29,10 +31,15 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
 
 app.use('/', routes);
+app.use('/registration', routes);
+app.use('/twit', routes);
+app.use('/home', routes);
 
 // Catch 404 errors
 // Forwarded to the error handlers
