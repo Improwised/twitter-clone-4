@@ -13,10 +13,11 @@ block content
   .container
     .row
       .col-sm-6
+      .col-sm-6
         .form-button
           form(action="/twit" method="POST")
             .form-group
               label.sr-only(for="form-username") Username
               input.form-control(type="text" name="username" placeholder="What's happen...")
-        .form-group
-                button.btn(type="submit") Tweet !!
+            .form-group
+              button.btn(type="submit") Tweet !!

@@ -1,6 +1,7 @@
 extends ./layouts/main.pug
 
 block content
+  link(rel='stylesheet' href='/css/style.css')
   .menu
       ul.nav.nav-tabs
         li
@@ -23,9 +24,6 @@ block content
               .form-group
                 label.sr-only(for="form-Email") Email
                 input.form-control(type="text" name="email" placeholder="Email...")
-              .form-group
-                label.sr-only(for="form-Mobile No") Mobile No
-                input.form-control(type="text" name="mobile_number" placeholder="Mobile No...")
               .form-group
                 label.sr-only(for="form-password") Password
                 input.form-control(type="password" name="password" placeholder="Password...")

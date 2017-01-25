@@ -40,6 +40,7 @@ app.use('/', routes);
 app.use('/registration', routes);
 app.use('/twit', routes);
 app.use('/home', routes);
+app.use('/profile', routes);
 
 // Catch 404 errors
 // Forwarded to the error handlers

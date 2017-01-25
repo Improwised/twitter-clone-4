@@ -28,14 +28,6 @@ router.get('/registration', (req, res, next) => {
   res.render('registration');
 });
 
-router.get('/twit', (req, res, next) => {
-  res.render('twit');
-});
-
-router.get('/home', (req, res, next) => {
-  res.render('home');
-});
-
 router.get('/profile', (req, res, next) => {
   res.render('profile');
 });
@@ -78,20 +70,20 @@ router.post('/twit', (req, res, next) => {
   const user_id=req.body.user_id;
   const tweet=req.body.tweet;
 
-  // console.log(username, "----->>>>>")
+  console.log(username, "----->>>>>")
   const query = DB.builder()
     .insert()
-    .into("twit")
-    .set("tweet", tweet)
-    .toParam()
+      .into("twit")
+      .set("user_id", user_id)
+      .set("tweet", tweet)
+      .toParam();
 
   DB.executeQuery(query, (error, results) => {
     if (error) {
       next(error);
       return;
     }
-
-    res.render('registration')
+    res.render('home',{res:results.rows[0]})
   });
 });
 
