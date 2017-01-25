@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressValidator = require('express-validator');
-const expressSession = require('express-Session');
+const session = require('express-session');
 
 // Load dotenv config
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -39,15 +39,16 @@ app.use(session({
   secret: 'password',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
-}))
+  // cookie: { secure: true }
+}));
 
 app.use('/', routes);
 app.use('/login', routes);
 app.use('/registration', routes);
 app.use('/twit', routes);
 app.use('/home', routes);
-
+app.use('/header',routes);
+app.use('/follow', routes);
 
 // Catch 404 errors
 // Forwarded to the error handlers
@@ -72,6 +73,7 @@ if (app.get('env') === 'development') {
 
 // Production error handler
 // Does not display stacktrace to the user
+
 
 server.listen(process.env.PORT);
 console.log(`Server started on port ${process.env.PORT}`);

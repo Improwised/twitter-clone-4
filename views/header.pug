@@ -1,0 +1,16 @@
+extends ./layouts/main.pug
+
+block content
+  .header
+    ul.nav.nav-tabs.color
+      li
+        #iconforlogin.glyphicon.glyphicon-home
+          a(href='/home') Home
+      li
+        #iconforlogin.glyphicon.glyphicon-search
+          a(href='/about') About
+      li#icon
+        button.button.btn.btn-info.btn-md(type= 'submit')
+          a(href='/logout') Logout
+        | &nbsp &nbsp
+

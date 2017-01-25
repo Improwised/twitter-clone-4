@@ -80,5 +80,31 @@ p{
 }
 
 
+/*for header */
+.header ul li{
+  float: left;
+  margin-left: 0px;
+  font-size: 20px;
+}
+.color{
+  background: #ffffff;
+}
+.header{
+  font-size: 20px;
+}
 
 
+/*a{
+  color: #23527c;
+}
+a:hover{
+  text-decoration: none;*/
+
+/*}*/
+#icon{
+  float: right;
+
+}
+i{
+  color: #23527c;
+}
