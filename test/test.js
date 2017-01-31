@@ -10,7 +10,7 @@ describe('index', () => {
         .get('/')
         .expect('Content-type', 'text/html; charset=utf-8')
         .expect(200)
-        .end( (err, res) => {
+        .end((err, res) => {
           res.status.should.be.equal(200);
           done();
         });
@@ -24,7 +24,7 @@ describe('GET /login', () => {
     .get('/login')
     .expect('Content-type', 'text/html; charset=utf-8')
     .expect(200)
-    .end( (err, res) => {
+    .end((err, res) => {
       if (err) {
         done(err);
       } else {
@@ -41,7 +41,7 @@ describe('GET /registration', () => {
     .get('/')
     .expect('Content-type', 'text/html; charset=utf-8')
     .expect(200)
-    .end( (err, res) => {
+    .end((err, res) => {
       if (err) {
         done(err);
       } else {
@@ -52,9 +52,78 @@ describe('GET /registration', () => {
   });
 });
 
+describe('GET /home', () => {
+  it('return home page', (done) => {
+    request(server)
+    .get('/home')
+    .expect('Content-type', 'text/html; charset=utf-8')
+    .expect(200)
+    .end((err, res) => {
+      if (err) {
+        done(err);
+      } else {
+        res.status.should.be.equal(200);
+        done();
+      }
+    });
+  });
+});
+
+describe('GET /profile', () => {
+  it(' return profile page', (done) => {
+    request(server)
+    .get('/profile')
+    .expect('Content-type', 'text/html; charset=utf-8')
+    .expect(200)
+    .end((err, res) => {
+      if (err) {
+        done(err);
+      } else {
+        res.status.should.be.equal(200);
+        done();
+      }
+    });
+  });
+});
+
+describe('GET /follow', () => {
+  it('follow the user', (done) => {
+    request(server)
+    .get('/home')
+    .expect('Content-type', 'text/html; charset=utf-8')
+    .expect(200)
+    .end((err, res) => {
+      if (err) {
+        done(err);
+      } else {
+        res.status.should.be.equal(200);
+        done();
+      }
+    });
+  });
+});
+
+describe('GET /unfollow', () => {
+  it('unfollow the user', (done) => {
+    request(server)
+    .get('/home')
+    .expect('Content-type', 'text/html; charset=utf-8')
+    .expect(200)
+    .end((err, res) => {
+      if (err) {
+        done(err);
+      } else {
+        res.status.should.be.equal(200);
+        done();
+      }
+    });
+  });
+});
+
+
 describe('POST /registration', () => {
   it('user can register', (done) => {
-    var registration = {
+    const registration = {
       username: 'abc',
       email: 'abc@gmail.com',
       password: 'password'
@@ -70,13 +139,13 @@ describe('POST /registration', () => {
     request(server)
       .post('/registration')
       .send(registration)
-      .expect(302)
+      .expect(200)
       .expect({})
-      .end( (err, res) => {
+      .end((err, res) => {
         if (err) {
           done(err);
         } else {
-          res.status.should.be.equal(302);
+          res.status.should.be.equal(200);
           done();
         }
       });
@@ -85,7 +154,7 @@ describe('POST /registration', () => {
 
 describe('POST /login', () => {
   it('user can register', (done) => {
-    var registration = {
+    const registration = {
       email: 'abc@gmail.com',
       password: 'password'
     };
@@ -102,7 +171,7 @@ describe('POST /login', () => {
       .send(registration)
       .expect(302)
       .expect({})
-      .end( (err, res) => {
+      .end((err, res) => {
         if (err) {
           done(err);
         } else {
@@ -112,3 +181,33 @@ describe('POST /login', () => {
       });
   });
 });
+
+describe('POST /twit', () => {
+  it('user can tweet', (done) => {
+    const tw = {
+      tweettext:'hello'
+    };
+    // Required Filed testing
+    // registration.should.have.property('email');
+    // registration.email.should.be.type('string');
+
+    // Non required filed testing
+    if (tw.tweettext) {
+      tw.tweettext.should.be.type('string');
+    }
+    request(server)
+      .post('/twit')
+      .send(tw)
+      .expect(302)
+      .expect({})
+      .end((err, res) => {
+        if (err) {
+          done(err);
+        } else {
+          res.status.should.be.equal(302);
+          done();
+        }
+      });
+  });
+});
+

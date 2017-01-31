@@ -103,7 +103,7 @@ router.post('/login', (req, res, next) => {
          // const session = req.session;
         const session = req.session;
         session.mail = email;
-         // console.log(results.rows);
+        console.log(results.rows[0]);
         session.user_id = results.rows[0].id;
         console.log(req.session.user_id);
         console.log('---->>>', req.session.mail);
