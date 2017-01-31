@@ -11,15 +11,10 @@ block content
               | &#x9;&#x9;&#x9;&#x9;&#x9;
             .profile-usertitle
               .profile-usertitle-name
-                | nidhi
-              | &#x9;&#x9;&#x9;&#x9;&#x9;
-              .profile-usertitle-job
-                | Developer
-              | &#x9;&#x9;&#x9;&#x9;&#x9;
-            .profile-userbuttons
-              button.btn.btn-success.btn-sm(type='button') Follow
-              | &#x9;&#x9;&#x9;&#x9;&#x9;
-              button.btn.btn-danger.btn-sm(type='button') Unfollow
+                each user in username
+                  span= user.username
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;
+
             .profile-usermenu
               ul.nav
                 li.active
@@ -28,9 +23,9 @@ block content
                     | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Home
                 | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                 li
-                  a(href='#')
+                  a(href='/profile')
                     i.glyphicon.glyphicon-user
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;About
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Profile
                 | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                 li
                   a(href='/twit')
@@ -51,19 +46,19 @@ block content
                 .form-bottom
                   span= cell.tweet_text
         .col-sm-3
-          each cell in follows
-            .profile-sidebar
-              .profile-userpic
-                img.img-responsive(src='http://images.all-free-download.com/images/wallpapers_large/orange_flower_wallpaper_flowers_nature_wallpaper_1665.jpg', alt='')
-                | &#x9;&#x9;&#x9;&#x9;&#x9;
-              .profile-usertitle
-                .profile-usertitle-name
-                  span= cell.username
-                | &#x9;&#x9;&#x9;&#x9;&#x9;
-              form(action='/follow' method='post')
-                .profile-userbuttons
-                  input(type='hidden' name='follower' value = cell.id )
-                  button.btn.btn-success.btn-sm(type='submit') Follow
+          h4 May People You Know ???
+            each cell in follows
+              .profile-sidebar
+                .profile-userpic
+                  img.img-responsive(src='http://images.all-free-download.com/images/wallpapers_large/orange_flower_wallpaper_flowers_nature_wallpaper_1665.jpg', alt='')
                   | &#x9;&#x9;&#x9;&#x9;&#x9;
-                  button.btn.btn-danger.btn-sm(type='button') Unfollow
+                .profile-usertitle
+                  .profile-usertitle-name
+                    span= cell.username
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;
+                form(action='/follow' method='post')
+                  .profile-userbuttons
+                    input(type='hidden' name='follower' value = cell.id)
+                    button.btn.btn-primary.btn-sm(type='submit') Follow
+
 

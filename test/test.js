@@ -1,15 +1,16 @@
+
 const should = require('should');
 const request = require('supertest');
 const server = require('../app');
 
-describe('index', function() {
-  describe('GET /', function() {
-    it('should return a homepage', function(done) {
+describe('index', () => {
+  describe('GET /', () => {
+    it('should return a homepage', (done) => {
       request(server)
         .get('/')
         .expect('Content-type', 'text/html; charset=utf-8')
         .expect(200)
-        .end(function(err, res) {
+        .end( (err, res) => {
           res.status.should.be.equal(200);
           done();
         });
@@ -23,7 +24,7 @@ describe('GET /login', () => {
     .get('/login')
     .expect('Content-type', 'text/html; charset=utf-8')
     .expect(200)
-    .end(function (err, res) {
+    .end( (err, res) => {
       if (err) {
         done(err);
       } else {
@@ -40,7 +41,7 @@ describe('GET /registration', () => {
     .get('/')
     .expect('Content-type', 'text/html; charset=utf-8')
     .expect(200)
-    .end(function (err, res) {
+    .end( (err, res) => {
       if (err) {
         done(err);
       } else {
@@ -52,7 +53,7 @@ describe('GET /registration', () => {
 });
 
 describe('POST /registration', () => {
-  it('user can register', function (done) {
+  it('user can register', (done) => {
     var registration = {
       username: 'abc',
       email: 'abc@gmail.com',
@@ -61,8 +62,6 @@ describe('POST /registration', () => {
     // Required Filed testing
     // registration.should.have.property('username');
     // registration.username.should.be.type('string');
-
-
 
     // Non required filed testing
     if (registration.username) {
@@ -73,7 +72,7 @@ describe('POST /registration', () => {
       .send(registration)
       .expect(302)
       .expect({})
-      .end(function (err, res) {
+      .end( (err, res) => {
         if (err) {
           done(err);
         } else {
@@ -85,7 +84,7 @@ describe('POST /registration', () => {
 });
 
 describe('POST /login', () => {
-  it('user can register', function (done) {
+  it('user can register', (done) => {
     var registration = {
       email: 'abc@gmail.com',
       password: 'password'
@@ -103,7 +102,7 @@ describe('POST /login', () => {
       .send(registration)
       .expect(302)
       .expect({})
-      .end(function (err, res) {
+      .end( (err, res) => {
         if (err) {
           done(err);
         } else {
@@ -113,4 +112,3 @@ describe('POST /login', () => {
       });
   });
 });
-
