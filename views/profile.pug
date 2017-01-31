@@ -1,21 +1,93 @@
 extends ./layouts/main.pug
 
 block content
-  link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
   .container
-      .fb-profile
-        img.fb-image-lg(align='left', src='http://lorempixel.com/850/280/nightlife/5/', alt='Profile image example')
-        |
-        img.fb-image-profile.thumbnail(align='left', src='http://lorempixel.com/180/180/people/9/', alt='Profile image example')
-        |
-        .fb-profile-text
-          h1 Eli Macy
-          |
-          p Girls just wanna go fun.
-    // /container
+    .row
+      .col-md-12
+        header#header
+          .slider
+            #carousel-example-generic.carousel.slide(data-ride='carousel')
+              .carousel-inner(role='listbox')
+                .item.active
+                  img(src='images/image.jpeg')
 
-        //- #tab2.tab-pane.fade.in
-        //-   h3 This is tab 2
-        //- #tab3.tab-pane.fade.in
-        //-   h3 This is tab 3
+          nav.navbar.navbar-default
+            .navbar-header
+              button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#mainNav')
+                span.sr-only Toggle navigation
+
+              a.navbar-brand(href='#')
+                img.img-responsive(src='http://images.all-free-download.com/images/wallpapers_large/orange_flower_wallpaper_flowers_nature_wallpaper_1665.jpg')
+              span.site-name
+                b
+                each user in users
+                  span= user.username
+            #mainNav.collapse.navbar-collapse
+              ul.nav.main-menu.navbar-nav
+                li
+                  a(href='/home')
+                    i.fa.fa-home
+                    |  HOME
+                li
+                  a(href='#') Follow
+                li
+                  a(href='/unfollow') Unfollow
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a(href='#')
+                    i.fa.fa-facebook
+                li
+                  a(href='#')
+                    i.fa.fa-twitter
+                li
+                  a(href='#')
+                    i.fa.fa-google-plus
+      .col-sm-3
+        .profile-sidebar
+          .profile-usermenu
+              ul.nav
+                li.active
+                  a(href='/home')
+                    i.glyphicon.glyphicon-home
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Home
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li
+                  a(href='/edit')
+                    i.glyphicon.glyphicon-user
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Edit Profile
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li
+                  a(href='/logout')
+                    i.glyphicon.glyphicon-pencil
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Logout
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+      .col-sm-6
+        .row
+          each cell1 in twits
+            .form-box
+              .form-top
+                .form-top-left
+                  h3
+                    span= cell1.username
+                .form-top-right
+                    span= cell1.time
+              hr
+              .form-bottom
+                span= cell1.tweet_text
+      .col-sm-3
+        h4 Follower....
+        each cell in follows
+          div.clearfix
+            .profile-sidebar
+                .profile-userpic
+                  img.img-responsive(src='http://images.all-free-download.com/images/wallpapers_large/orange_flower_wallpaper_flowers_nature_wallpaper_1665.jpg', alt='')
+                | &#x9;&#x9;&#x9;&#x9;&#x9;
+                .profile-usertitle
+                  .profile-usertitle-name
+                    span= cell.username
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;
+            form(action='/unfollow' method='post')
+              .profile-userbuttons
+                input(type='hidden' name='follower' value = cell.id_f)
+                button.btn.btn-primary.btn-sm(type='submit') Unfollow
 

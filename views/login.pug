@@ -6,11 +6,13 @@ block content
   //-   span
   //-   .glyphicon.glyphicon-heart
   //-   Home
+
   .container
     .menu
       ul.nav.nav-tabs
         li
           #iconforlogin.glyphicon.glyphicon-heart
+
     .row
       .col-sm-6.col-sm-offset-3.form-box
         .form-top
@@ -22,20 +24,19 @@ block content
           form(action="/login" method="post")
             .form-group
               label.sr-only(for="form-username") Email
-              input.form-control(type="text" name= "email" placeholder="Email...")
+              input.form-control(type="email" name= "email" placeholder="Email..." required = '')
             .form-group
               label.sr-only(for="form-password") Password
-              input.form-password.form-control(type="password" name= "password" placeholder="Password...")
+              input.form-password.form-control(type="password" name= "password" placeholder="Password..." required = '')
             .form-group
               button.btn(type="submit") Sign in !
-              input(type="checkbox" checked="checked" name="Remember_me" value="Remember_me")
+              input(type="checkbox" checked="checked" name="Remember_me" value="Remember_me" required = '')
               label  &nbsp &nbsp Remember me
               a(href="/forgot") &nbsp &nbsp Forgot Password..??
 
             .form-group
               label New to Twitter-clone?
               a(href="/") &nbsp &nbsp Sign Up Now..??
-
 
 
 

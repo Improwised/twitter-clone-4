@@ -16,29 +16,35 @@ block content
               .form-top-right
                 i.fa.fa-key.fa-4x
             .form-bottom
-              form(action="/registration" method="POST")
+              form(action='/registration' method='POST')
                 .form-group
-                  label.sr-only(for="form-username") Username
-                  input.form-control(type="text" name="username" placeholder="Username...")
+                  label.sr-only(for='form-username') Username
+                  input.form-control(type='text' name='username' placeholder='Username...' required = '')
                 .form-group
-                  label.sr-only(for="form-Email") Email
-                  input.form-control(type="text" name="email" placeholder="Email...")
+                  label.sr-only(for='form-Email') Email
+                  input.form-control(type='email' name='email' placeholder='Email...' required = '')
                 .form-group
-                  label.sr-only(for="form-password") Password
-                  input.form-control(type="password" name="password" placeholder="Password...")
+                  label.sr-only(for='form-password') Password
+                  input.form-control(type='password' name='password' placeholder='Password...' required = '')
                 .form-group
-                  button.btn(type="submit") Sign in !
+                  img.avatar.img-circle(src='images/minion.jpg', alt='avatar')
+                  h6 Upload a different photo...
+                  input.form-control(type='file')
+                  label.sr-only(for='form-image') image
+                  input.form-control(type='file' required = '' name='image')
+                .form-group
+                  button.btn(type='submit') Sign in !
                 .form-group
                  label Already Account?
-                 a(href="/") &nbsp &nbsp Sign in Now..??
+                 a(href='/') &nbsp &nbsp Sign in Now..??
 
 //- {{# if success }}
-//- <section class="success">
+//- <section class='success'>
 //- <h2>Successful Validation</h2>
 //- </section>
 //- {{else}}
 //-   {{# if success }}
-//-     <section class="errors">
+//-     <section class='errors'>
 //-       <ul>
 //-         {{# each erros }}
 //-           <li>{{this.msg}}</li>

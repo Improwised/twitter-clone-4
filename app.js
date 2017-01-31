@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const expressValidator = require('express-validator');
 const session = require('express-session');
-
 // Load dotenv config
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line global-require
@@ -35,7 +34,9 @@ app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use(session({
+  name: 'myCookie',
   secret: 'password',
   resave: false,
   saveUninitialized: true,
@@ -47,8 +48,29 @@ app.use('/login', routes);
 app.use('/registration', routes);
 app.use('/twit', routes);
 app.use('/home', routes);
-app.use('/header',routes);
+app.use('/header', routes);
 app.use('/follow', routes);
+app.use('/unfollow', routes);
+app.use('/profile', routes);
+app.use('/edit', routes);
+app.use('/logout', routes);
+
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
 
 // Catch 404 errors
 // Forwarded to the error handlers

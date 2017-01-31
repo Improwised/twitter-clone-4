@@ -7,10 +7,10 @@ block content
         #iconforlogin.glyphicon.glyphicon-home
           a(href='/home') Home
       li
-        #iconforlogin.glyphicon.glyphicon-search
-          a(href='/about') About
+        #iconforlogin.glyphicon.glyphicon-user
+          a(href='/profile') Profile
       li#icon
-        button.button.btn.btn-info.btn-md(type= 'submit')
-          a(href='/logout') Logout
-        | &nbsp &nbsp
+        form(action='/logout' method='get')
+          button.btn.btn-primary(type= 'submit') Logout
+          | &nbsp &nbsp
 
