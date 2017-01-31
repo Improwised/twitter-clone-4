@@ -1,41 +1,69 @@
 extends ./layouts/main.pug
 
 block content
-  link(rel='stylesheet' href='/css/home.css')
-  .col-lg-6.col-sm-6
-    .card.hovercard
-      .card-background
-        img.card-bkimg(alt='', src='http://lorempixel.com/100/100/people/9/')
-        // http://lorempixel.com/850/280/people/9/
-      .useravatar
-        img(alt='', src='http://lorempixel.com/100/100/people/9/')
-      .card-info
-        span.card-title abcd
-    .btn-pref.btn-group.btn-group-justified.btn-group-lg(role='group', aria-label='...')
-      .btn-group(role='group')
-        button#stars.btn.btn-primary(type='submit', href='/twit', data-toggle='tab')
-          a(href="/twit")
-            span.glyphicon.glyphicon-star(aria-hidden='true')
-            .hidden-xs tweets
-      .btn-group(role='group')
-        button#favorites.btn.btn-default(type='button', href='/following', data-toggle='tab')
-          a(href="/following")
-            span.glyphicon.glyphicon-heart(aria-hidden='true')
-            .hidden-xs Following
-      .btn-group(role='group')
-        button#following.btn.btn-default(type='button', href='/followers', data-toggle='tab')
-          a(href="/followers")
-            span.glyphicon.glyphicon-user(aria-hidden='true')
-            .hidden-xs Followers
-  //- .container
-  //- .row
-  //-   each book in twit
-  //-     .col-md-4
-  //-       .well
-  //-         p
-  //-         span= book.user_id
-  //-         br
-  //-         br
-  //-         span= book.tweet
-  //-         br
-  //-         br
+  .container
+    include header.pug
+      .row.profile
+        .col-sm-3
+          .profile-sidebar
+            .profile-userpic
+              img.img-responsive(src='http://images.all-free-download.com/images/wallpapers_large/orange_flower_wallpaper_flowers_nature_wallpaper_1665.jpg', alt='')
+              | &#x9;&#x9;&#x9;&#x9;&#x9;
+            .profile-usertitle
+              .profile-usertitle-name
+                | nidhi
+              | &#x9;&#x9;&#x9;&#x9;&#x9;
+              .profile-usertitle-job
+                | Developer
+              | &#x9;&#x9;&#x9;&#x9;&#x9;
+            .profile-userbuttons
+              button.btn.btn-success.btn-sm(type='button') Follow
+              | &#x9;&#x9;&#x9;&#x9;&#x9;
+              button.btn.btn-danger.btn-sm(type='button') Unfollow
+            .profile-usermenu
+              ul.nav
+                li.active
+                  a(href='/home')
+                    i.glyphicon.glyphicon-home
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Home
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li
+                  a(href='#')
+                    i.glyphicon.glyphicon-user
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;About
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li
+                  a(href='/twit')
+                    i.glyphicon.glyphicon-pencil
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Tweet
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+        .col-sm-6
+          .row
+            each cell in twits
+              .form-box
+                .form-top
+                  .form-top-left
+                    h3
+                      span= cell.username
+                  .form-top-right
+                      span= cell.time
+                hr
+                .form-bottom
+                  span= cell.tweet_text
+        .col-sm-3
+          each cell in follows
+            .profile-sidebar
+              .profile-userpic
+                img.img-responsive(src='http://images.all-free-download.com/images/wallpapers_large/orange_flower_wallpaper_flowers_nature_wallpaper_1665.jpg', alt='')
+                | &#x9;&#x9;&#x9;&#x9;&#x9;
+              .profile-usertitle
+                .profile-usertitle-name
+                  span= cell.username
+                | &#x9;&#x9;&#x9;&#x9;&#x9;
+              form(action='/follow' method='post')
+                .profile-userbuttons
+                  input(type='hidden' name='follower' value = cell.id )
+                  button.btn.btn-success.btn-sm(type='submit') Follow
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;
+                  button.btn.btn-danger.btn-sm(type='button') Unfollow
+

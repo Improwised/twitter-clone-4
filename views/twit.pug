@@ -1,23 +1,19 @@
-extends ./layouts/main.pug
 
 block content
-  link(rel='stylesheet' href='/css/twit.css')
-  .menu
-      ul.nav.nav-tabs
-        li
-          .glyphicon.glyphicon-heart
-        li
-          a(href="/home") Home
-        li
-          a(href="/profile") Profile
   .container
-    .row
-      .col-sm-6
-      .col-sm-6
-        .form-button
-          form(action="/twit" method="POST")
-            .form-group
-              label.sr-only(for="form-username") Username
-              input.form-control(type="text" name="username" placeholder="What's happen...")
-            .form-group
-              button.btn(type="submit") Tweet !!
+    include header.pug
+      .row
+        .col-sm-6.col-sm-offset-3.form-box
+          .form-top
+            .form-top-left
+              h3 Add New Event
+            .form-top-right
+              i.fa.fa-pencil.fa-4x
+          .form-bottom
+            form(action='/twit' method="POST")
+              .form-group
+                label.sr-only(for="form-tweet_text") tweet-text
+                input.form-control(type="text" name="tweet_text" placeholder="What's happen... Add your tweet...!!")
+              .form-group
+                button.btn(type="submit") Tweet !!
+
