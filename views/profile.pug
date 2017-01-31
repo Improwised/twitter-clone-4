@@ -13,15 +13,14 @@ block content
 
           nav.navbar.navbar-default
             .navbar-header
-              button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#mainNav')
-                span.sr-only Toggle navigation
-
-              a.navbar-brand(href='#')
-                img.img-responsive(src='http://images.all-free-download.com/images/wallpapers_large/orange_flower_wallpaper_flowers_nature_wallpaper_1665.jpg')
-              span.site-name
-                b
-                each user in users
-                  span= user.username
+              each user in users
+                button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#mainNav')
+                  span.sr-only Toggle navigation
+                a.navbar-brand(href='#')
+                  img.img-responsive(src='images/'+ user.image)
+                span.site-name
+                  b
+                    span= user.username
             #mainNav.collapse.navbar-collapse
               ul.nav.main-menu.navbar-nav
                 li
@@ -29,9 +28,11 @@ block content
                     i.fa.fa-home
                     |  HOME
                 li
-                  a(href='#') Follow
+                  a(href='/edit')
+                    i.fa.fa-user
+                    |  Edit
                 li
-                  a(href='/unfollow') Unfollow
+                  a(href='/logout') Logout
               ul.nav.navbar-nav.navbar-right
                 li
                   a(href='#')
@@ -75,12 +76,12 @@ block content
               .form-bottom
                 span= cell1.tweet_text
       .col-sm-3
-        h4 Follower....
+        h4 Follower.
         each cell in follows
           div.clearfix
             .profile-sidebar
                 .profile-userpic
-                  img.img-responsive(src='http://images.all-free-download.com/images/wallpapers_large/orange_flower_wallpaper_flowers_nature_wallpaper_1665.jpg', alt='')
+                  img.img-responsive(src='images/'+cell.image, alt='')
                 | &#x9;&#x9;&#x9;&#x9;&#x9;
                 .profile-usertitle
                   .profile-usertitle-name

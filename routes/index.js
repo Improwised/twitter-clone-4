@@ -4,6 +4,10 @@ const DB = require('../helpers/db');
 
 const router = express.Router();
 
+const path = require('path');
+
+const multer = require('multer');
+const upload = multer({ dest: path.resolve(__dirname, '../public/images/') });
 // GET: /
 router.get('/', (req, res, next) => {
   // Constuct and run a simple query
@@ -28,24 +32,24 @@ router.get('/registration', (req, res) => {
   res.render('registration');
 });
 
-router.post('/registration', (req, res, next) => {
+router.post('/registration', upload.single('file'), (req, res, next) => {
   // Constuct and run a simple query
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
-  const img = req.body.image;
+  const filename = req.file.filename;
 
   req.checkBody('username', 'Username is required').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('email', 'Email is required').notEmpty();
   req.checkBody('email', 'Email is not valid').isEmail();
-  req.checkBody('img', 'Image is required').notEmpty();
+
   const errors = req.validationErrors();
 
   if (errors) {
     console.log('FAILED');
     res.render('registration', {
-      errors : errors,
+      errors: errors,
     });
     console.log(errors);
   } else {
@@ -55,14 +59,13 @@ router.post('/registration', (req, res, next) => {
       .set('username', username)
       .set('password', password)
       .set('email', email)
-      .set('image', img)
+      .set('image', filename)
       .toParam();
-    DB.executeQuery(query, (error, results) => {
+    DB.executeQuery(query, (error) => {
       if (error) {
         next(error);
         return;
       }
-      console.log(results.rows);
       res.redirect('/login');
     });
   }
@@ -84,7 +87,7 @@ router.post('/login', (req, res, next) => {
   if (errors) {
     console.log('FAILED');
     res.render('login', {
-      errors : errors,
+      errors: errors,
     });
     console.log(errors);
   } else {
@@ -119,12 +122,10 @@ router.post('/login', (req, res, next) => {
   }
 });
 
-
-
 router.get('/home', (req, res, next) => {
   let query;
   const session = req.session;
-  console.log(session.mail);
+  console.log('------->>homecalled');
   if (session.mail) {
     query = DB.builder()
       .select()
@@ -132,9 +133,11 @@ router.get('/home', (req, res, next) => {
       .field('tweet_text')
       .field('time')
       .from('registration', 'r')
-      .join(DB.builder().select().from('twit'), 'u', 'u.user_id =r.id')
+      .join(DB.builder().select().from('twit'), 'u', 'r.id = u.user_id ')
+      .where('u.user_id IN ? OR u.user_id = ?',
+      (DB.builder().select().field('follower_id').from('follow').where('login_user= ?', req.session.user_id)),req.session.user_id)
+      .order('time',false)
       .toParam();
-
     DB.executeQuery(query, (error, twits) => {
       if (error) {
         next(error);
@@ -150,7 +153,7 @@ router.get('/home', (req, res, next) => {
       .select()
       .field('follower_id')
       .from('follow')
-      .where('user_id = ?', session.user_id))
+      .where('login_user = ?', session.user_id))
       .toParam();
       DB.executeQuery(query, (error, follows) => {
         if (error) {
@@ -160,12 +163,13 @@ router.get('/home', (req, res, next) => {
 
         query = DB.builder()
           .select()
-          .from('registration', 'r')
           .field('username')
+          .field('image')
+          .from('registration', 'r')
           .where('id = ?', req.session.user_id)
           .toParam();
           console.log(query);
-        DB.executeQuery(query, (error, username) => {
+        DB.executeQuery(query, (error, users) => {
           if (error) {
             next(error);
             return;
@@ -174,7 +178,7 @@ router.get('/home', (req, res, next) => {
           res.render('home', {
             twits: twits.rows,
             follows: follows.rows,
-            username: username.rows,
+            users: users.rows,
           });
         })
       });
@@ -187,13 +191,15 @@ router.get('/home', (req, res, next) => {
 
 router.post('/follow', (req, res, next) => {
   const session = req.session;
+  console.log("------>>>>>>")
   const query = DB.builder()
     .insert()
     .into('follow')
-    .set('user_id', session.user_id)
+    .set('login_user', req.session.user_id)
     .set('follower_id', req.body.follower)
     .toParam();
-  DB.executeQuery(query, (error) => {
+    console.log(query);
+  DB.executeQuery(query, (error, results) => {
     if (error) {
       next(error);
       return;
@@ -219,6 +225,7 @@ router.post('/unfollow', (req, res, next) => {
 });
 
 router.get('/profile', (req, res, next) => {
+  console.log('---->>profilecalled')
   const session = req.session;
   console.log(session.mail);
   if (session.mail) {
@@ -233,6 +240,7 @@ router.get('/profile', (req, res, next) => {
         next(error);
         return;
       }
+
       query = DB.builder()
         .select()
         .field('email')
@@ -249,24 +257,26 @@ router.get('/profile', (req, res, next) => {
           next(error);
           return;
         }
-
-
+        console.log('=-------')
         query = DB.builder()
-      .select()
-      .field('username')
-      .field('follower_id')
-      .field('id_f')
-      .field('id')
-      .from('registration','r')
-      .join(DB.builder().select().from('follow'), 'f', 'r.id= f.follower_id')
-      .where('user_id = ?', session.user_id)
-      .toParam();
-      DB.executeQuery(query, (error, follows) => {
-        if (error) {
-          next(error);
-          return;
-        }
-          console.log('--------->>>>>',follows.rows)
+          .select()
+          .field('username')
+          .field('follower_id')
+          .field('id_f')
+          .field('id')
+          .field('image')
+          .from('registration','r')
+          .join(DB.builder()
+          .select()
+          .from('follow'), 'f', 'r.id= f.follower_id')
+          .where('login_user = ?', session.user_id)
+          .toParam();
+        DB.executeQuery(query, (error, follows) => {
+          if (error) {
+            next(error);
+            return;
+          }
+          console.log('--------->>>>>',users.rows)
           res.render('profile', {
             users: users.rows,
             twits: twits.rows,
@@ -315,6 +325,7 @@ router.get('/edit', (req, res, next) => {
       .field('email')
       .field('username')
       .field('password')
+      .field('image')
       .from('registration')
       .where('id = ?', session.user_id)
       .toParam();
@@ -333,11 +344,12 @@ else {
   }
 });
 
-router.post('/edit', (req, res,next) => {
+router.post('/edit', upload.single('file'), (req, res,next) => {
   console.log('------>>>>>hhhhhhh');
   const username = req.body.editusername;
   const password = req.body.editpassword;
   const email = req.body.editemail;
+  const filename = req.file.filename;
   const session = req.session;
   const query = DB.builder()
     .update()
@@ -345,6 +357,7 @@ router.post('/edit', (req, res,next) => {
     .set('username', username)
     .set('password', password)
     .set('email', email)
+    .set('image', filename)
     .where('id = ?', session.user_id)
     .toParam();
   DB.executeQuery(query, (error, results) => {
