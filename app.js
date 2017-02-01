@@ -58,8 +58,8 @@ app.use('/logout', routes);
 app.use(expressValidator({
   errorFormatter: (param, msg, value) => {
     const namespace = param.split('.'),
-    root = namespace.shift(),
-    formParam = root;
+      root = namespace.shift(),
+      formParam = root;
 
     while (namespace.length) {
       formParam += '[' + namespace.shift() + ']';
@@ -67,9 +67,9 @@ app.use(expressValidator({
     return {
       param : formParam,
       msg   : msg,
-      value : value
+      value : value,
     };
-  }
+  };
 }));
 // Catch 404 errors
 // Forwarded to the error handlers

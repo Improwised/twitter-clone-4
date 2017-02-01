@@ -1,7 +1,9 @@
-
-const should = require('should');
 const request = require('supertest');
+
 const server = require('../app');
+
+let describe;
+let it;
 
 describe('index', () => {
   describe('GET /', () => {
@@ -36,7 +38,7 @@ describe('GET /login', () => {
 });
 
 describe('GET /registration', () => {
-  it('should return login page', (done) => {
+  it('should return registration page', (done) => {
     request(server)
     .get('/')
     .expect('Content-type', 'text/html; charset=utf-8')
@@ -86,56 +88,13 @@ describe('GET /profile', () => {
   });
 });
 
-describe('GET /follow', () => {
-  it('follow the user', (done) => {
-    request(server)
-    .get('/home')
-    .expect('Content-type', 'text/html; charset=utf-8')
-    .expect(200)
-    .end((err, res) => {
-      if (err) {
-        done(err);
-      } else {
-        res.status.should.be.equal(200);
-        done();
-      }
-    });
-  });
-});
-
-describe('GET /unfollow', () => {
-  it('unfollow the user', (done) => {
-    request(server)
-    .get('/home')
-    .expect('Content-type', 'text/html; charset=utf-8')
-    .expect(200)
-    .end((err, res) => {
-      if (err) {
-        done(err);
-      } else {
-        res.status.should.be.equal(200);
-        done();
-      }
-    });
-  });
-});
-
-
 describe('POST /registration', () => {
   it('user can register', (done) => {
     const registration = {
       username: 'abc',
       email: 'abc@gmail.com',
-      password: 'password'
+      password: 'password',
     };
-    // Required Filed testing
-    // registration.should.have.property('username');
-    // registration.username.should.be.type('string');
-
-    // Non required filed testing
-    if (registration.username) {
-      registration.username.should.be.type('string');
-    }
     request(server)
       .post('/registration')
       .send(registration)
@@ -156,16 +115,8 @@ describe('POST /login', () => {
   it('user can register', (done) => {
     const registration = {
       email: 'abc@gmail.com',
-      password: 'password'
+      password: 'password',
     };
-    // Required Filed testing
-    // registration.should.have.property('email');
-    // registration.email.should.be.type('string');
-
-    // Non required filed testing
-    if (registration.email) {
-      registration.email.should.be.type('string');
-    }
     request(server)
       .post('/login')
       .send(registration)
@@ -185,16 +136,8 @@ describe('POST /login', () => {
 describe('POST /twit', () => {
   it('user can tweet', (done) => {
     const tw = {
-      tweettext:'hello'
+      tweet_text : 'hello',
     };
-    // Required Filed testing
-    // registration.should.have.property('email');
-    // registration.email.should.be.type('string');
-
-    // Non required filed testing
-    if (tw.tweettext) {
-      tw.tweettext.should.be.type('string');
-    }
     request(server)
       .post('/twit')
       .send(tw)

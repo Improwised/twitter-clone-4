@@ -103,7 +103,7 @@ router.post('/login', (req, res, next) => {
          // const session = req.session;
         const session = req.session;
         session.mail = email;
-        console.log(results.rows[0]);
+         // console.log(results.rows);
         session.user_id = results.rows[0].id;
         console.log(req.session.user_id);
         console.log('---->>>', req.session.mail);
@@ -171,11 +171,10 @@ router.get('/home', (req, res, next) => {
             follows: follows.rows,
             username: username.rows,
           });
-        })
+        });
       });
     });
-  }
-  else {
+  } else {
     res.render('login');
   }
 });
@@ -250,7 +249,7 @@ router.get('/profile', (req, res, next) => {
           .field('follower_id')
           .field('id_f')
           .field('id')
-          .from('registration','r')
+          .from('registration', 'r')
           .join(DB.builder().select().from('follow'), 'f', 'r.id= f.follower_id')
           .where('user_id = ?', session.user_id)
           .toParam();
@@ -342,7 +341,7 @@ router.post('/edit', (req, res, next) => {
       next(error);
       return;
     }
-    console.log('------->>>>',results.rows);
+    console.log('------->>>>' ,results.rows);
     res.redirect('/home');
   });
 });
