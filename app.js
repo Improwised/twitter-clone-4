@@ -54,7 +54,6 @@ app.use('/unfollow', routes);
 app.use('/profile', routes);
 app.use('/edit', routes);
 app.use('/logout', routes);
-
 // Catch 404 errors
 // Forwarded to the error handlers
 app.use((req, res, next) => {

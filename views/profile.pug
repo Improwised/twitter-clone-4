@@ -19,8 +19,7 @@ block content
                 a.navbar-brand(href='#')
                   img.img-responsive(src='images/'+ user.image)
                 span.site-name
-                  b
-                    span= user.username
+                  span= user.username
             #mainNav.collapse.navbar-collapse
               ul.nav.main-menu.navbar-nav
                 li
@@ -73,7 +72,7 @@ block content
                 .form-top-right
                     span= cell1.time
               hr
-              .form-bottom
+              .form-bottom#tweet
                 span= cell1.tweet_text
       .col-sm-3
         h4 Follower.
@@ -91,4 +90,5 @@ block content
               .profile-userbuttons
                 input(type='hidden' name='follower' value = cell.id_f)
                 button.btn.btn-primary.btn-sm(type='submit') Unfollow
+
 

@@ -65,7 +65,9 @@ h4{
   margin-bottom: 15px;
   margin-left: 20px;
 }*/
-
+p{
+  color: #ffffff;
+}
 .profile-userbuttons {
   text-align: center;
   margin-top: 10px;
