@@ -1,6 +1,8 @@
-const should = require('should');
 const request = require('supertest');
+
 const server = require('../app');
+
+const should = require('should');
 
 describe('index', () => {
   describe('GET /', () => {
@@ -35,7 +37,7 @@ describe('GET /login', () => {
 });
 
 describe('GET /registration', () => {
-  it('should return login page', (done) => {
+  it('should return registration page', (done) => {
     request(server)
     .get('/')
     .expect('Content-type', 'text/html; charset=utf-8')
@@ -84,6 +86,7 @@ describe('GET /profile', () => {
     });
   });
 });
+
 describe('POST /registration', () => {
   it('user can register', (done) => {
     const registration = {
@@ -91,6 +94,7 @@ describe('POST /registration', () => {
       email: 'abc@gmail.com',
       password: '243',
       image: 'sun.jpg',
+
     };
     request(server)
       .post('/registration')
@@ -146,9 +150,8 @@ describe('GET /twit', () => {
 describe('POST /twit', () => {
   it('user can tweet', (done) => {
     const tw = {
-      tweetText: 'hello',
+      tweet_text: 'hello',
       user_id: '222',
-
     };
     request(server)
       .post('/twit')
@@ -221,8 +224,8 @@ describe('profile', () => {
 
 describe('POST /editprofile', () => {
   it('user can edit their profile photo', (done) => {
-    const editprofile= {
-     image: 'sun.jpg'
+    const editprofile = {
+      image: 'sun.jpg',
 
     };
     request(server)

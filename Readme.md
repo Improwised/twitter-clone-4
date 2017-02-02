@@ -37,3 +37,4 @@ node app
 * User can tweet .
 * User can Follow the other users.
 * User update their profile.
+* User upload their profile photo.

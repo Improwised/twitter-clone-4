@@ -32,9 +32,9 @@ router.get('/registration', (req, res) => {
 
 router.post('/registration', upload.single('file'), (req, res, next) => {
   // Constuct and run a simple query
-  const username = req.body.username;
-  const password = req.body.password;
-  const email = req.body.email;
+  const username = req.sanitize('username').trim();
+  const password = req.sanitize('password').trim();
+  const email = req.sanitize('email').trim();
 
   let photo = '';
   if (req.file) {
@@ -106,15 +106,10 @@ router.post('/login', (req, res, next) => {
         return;
       }
       if (results.rowCount) {
-        console.log('>>>>> found');
-         // const session = req.session;
         const session = req.session;
         session.mail = email;
-        console.log(results.rows[0]);
+         // console.log(results.rows);
         session.user_id = results.rows[0].id;
-        console.log(req.session.user_id);
-        console.log('---->>>', req.session.mail);
-        console.log('.....session created');
         res.redirect('/home');
       } else {
         console.log('>>>>> not found');
@@ -127,7 +122,6 @@ router.post('/login', (req, res, next) => {
 router.get('/home', (req, res, next) => {
   let query;
   const session = req.session;
-  console.log('------->>homecalled');
   if (session.mail) {
     query = DB.builder()
       .select()
@@ -191,14 +185,12 @@ router.get('/home', (req, res, next) => {
 
 router.post('/follow', (req, res, next) => {
   const session = req.session;
-  console.log('------>>>>>>');
   const query = DB.builder()
     .insert()
     .into('follow')
     .set('login_user', session.user_id)
     .set('follower_id', req.body.follower)
     .toParam();
-  console.log(query);
   DB.executeQuery(query, (error) => {
     if (error) {
       next(error);
@@ -224,7 +216,6 @@ router.post('/unfollow', (req, res, next) => {
 });
 
 router.get('/profile', (req, res, next) => {
-  console.log('---->>profilecalled');
   const session = req.session;
   let query;
   console.log(session.mail);
@@ -330,7 +321,6 @@ router.get('/edit', (req, res, next) => {
         next(error);
         return;
       }
-      console.log('------->>>>get', results.rows);
       res.render('edit', { res: results.rows });
     });
   } else {
@@ -346,7 +336,7 @@ router.get('/editprofile', (req, res, next) => {
       .from('registration')
       .where('id = ?', session.user_id)
       .toParam();
-     DB.executeQuery(query, (error, results) => {
+    DB.executeQuery(query, (error, results) => {
       if (error) {
         next(error);
         return;
@@ -358,8 +348,7 @@ router.get('/editprofile', (req, res, next) => {
   }
 });
 router.post('/editprofile', upload.single('file'), (req, res, next) => {
-
-   let photo = '';
+  let photo = '';
   if (req.file) {
     photo = req.file.filename;
   } else {
@@ -371,16 +360,15 @@ router.post('/editprofile', upload.single('file'), (req, res, next) => {
     .set('image', photo)
     .where('id = ? ', req.session.user_id)
     .toParam();
-   DB.executeQuery(query, (error, results) => {
-      if (error) {
-        next(error);
-        return;
-      }
-      res.redirect('/home');
-    });
-})
+  DB.executeQuery(query, (error) => {
+    if (error) {
+      next(error);
+      return;
+    }
+    res.redirect('/home');
+  });
+});
 router.post('/edit', upload.single('file'), (req, res, next) => {
-  console.log('------>>>>>hhhhhhh');
   const username = req.body.editusername;
   const password = req.body.editpassword;
   const email = req.body.editemail;
@@ -393,24 +381,21 @@ router.post('/edit', upload.single('file'), (req, res, next) => {
     .set('email', email)
     .where('id = ?', session.user_id)
     .toParam();
-  DB.executeQuery(query, (error, results) => {
+  DB.executeQuery(query, (error) => {
     if (error) {
       next(error);
       return;
     }
-    console.log('------->>>>', results.rows);
     res.redirect('/home');
   });
 });
 
 router.get('/logout', (req, res) => {
-  console.log('----->>>>', req.session);
   req.session.destroy((err) => {
     if (err) {
       console.log(err);
     } else {
       res.clearCookie('myCookie');
-      console.log('destroyed ----->>>>', req.session);
       res.redirect('/login');
     }
   });
