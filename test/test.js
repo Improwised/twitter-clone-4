@@ -112,7 +112,7 @@ describe('POST /login', () => {
   it('user can register', (done) => {
     const registration = {
       email: 'abc@gmail.com',
-      password: '123'
+      password: '123',
     };
     request(server)
       .post('/login')
@@ -203,6 +203,44 @@ describe('POST /edit', () => {
       });
   });
 });
+
+describe('profile', () => {
+  describe('GET /editprofile', () => {
+    it('should return a update profile photo page', (done) => {
+      request(server)
+        .get('/editprofile')
+        .expect('Content-type', 'text/html; charset=utf-8')
+        .expect(200)
+        .end((err, res) => {
+          res.status.should.be.equal(200);
+          done();
+        });
+    });
+  });
+});
+
+describe('POST /editprofile', () => {
+  it('user can edit their profile photo', (done) => {
+    const editprofile= {
+     image: 'sun.jpg'
+
+    };
+    request(server)
+      .post('/editprofile')
+      .send(editprofile)
+      .expect(302)
+      .expect({})
+      .end((err, res) => {
+        if (err) {
+          done(err);
+        } else {
+          res.status.should.be.equal(302);
+          done();
+        }
+      });
+  });
+});
+
 describe('POST /follow', () => {
   it('user can follow other user', (done) => {
     const follower = {

@@ -13,6 +13,7 @@ globals:
 rules:
   vars-on-top: 0
 
+
   # Warnings
   max-len: [1]
 

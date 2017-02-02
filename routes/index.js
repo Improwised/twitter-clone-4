@@ -44,14 +44,15 @@ router.post('/registration', upload.single('file'), (req, res, next) => {
   }
   req.checkBody('username', 'Username is required').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
+  req.checkBody('password', 'Password have min 2 and max 8 character').len(2, 8);
   req.checkBody('email', 'Email is required').notEmpty();
   req.checkBody('email', 'Email is not valid').isEmail();
   // req.checkBody('photo', 'Image is required').notEmpty();
-  const errors= req.validationErrors();
+  const errors = req.validationErrors();
   if (errors) {
     console.log('FAILED');
     res.render('registration', {
-      errors: errors,
+      errors,
     });
     console.log(errors);
   } else {
@@ -88,7 +89,7 @@ router.post('/login', (req, res, next) => {
   if (errors) {
     console.log('FAILED');
     res.render('login', {
-      errors: errors,
+      errors,
     });
     console.log(errors);
   } else {
@@ -198,7 +199,7 @@ router.post('/follow', (req, res, next) => {
     .set('follower_id', req.body.follower)
     .toParam();
   console.log(query);
-  DB.executeQuery(query, (error, results) => {
+  DB.executeQuery(query, (error) => {
     if (error) {
       next(error);
       return;
@@ -213,7 +214,7 @@ router.post('/unfollow', (req, res, next) => {
     .from('follow')
     .where('id_f = ?', req.body.follower)
     .toParam();
-  DB.executeQuery(query, (error, results) => {
+  DB.executeQuery(query, (error) => {
     if (error) {
       next(error);
       return;
@@ -251,7 +252,7 @@ router.get('/profile', (req, res, next) => {
         .where('email = ? ', req.session.mail)
         .toParam();
       console.log(query);
-      DB.executeQuery(query, (error, twits) => {
+      DB.executeQuery(query, (errors, twits) => {
         if (errors) {
           next(errors);
           return;
@@ -269,7 +270,7 @@ router.get('/profile', (req, res, next) => {
           .from('follow'), 'f', 'r.id= f.follower_id')
           .where('login_user = ?', session.user_id)
           .toParam();
-        DB.executeQuery(query, (error, follows) => {
+        DB.executeQuery(query, (err, follows) => {
           if (err) {
             next(err);
             return;
@@ -302,7 +303,7 @@ router.post('/twit', (req, res, next) => {
     .set('user_id', session.user_id)
     .toParam();
 
-  DB.executeQuery(query, (error, results) => {
+  DB.executeQuery(query, (error) => {
     if (error) {
       next(error);
       return;
@@ -310,6 +311,7 @@ router.post('/twit', (req, res, next) => {
     res.redirect('/home');
   });
 });
+
 
 router.get('/edit', (req, res, next) => {
   const session = req.session;
@@ -335,15 +337,29 @@ router.get('/edit', (req, res, next) => {
     res.render('login');
   }
 });
-
-router.post('/edit', upload.single('file'), (req, res, next) => {
-  console.log('------>>>>>hhhhhhh');
-  const username = req.body.editusername;
-  const password = req.body.editpassword;
-  const email = req.body.editemail;
+router.get('/editprofile', (req, res, next) => {
   const session = req.session;
+  if (session.mail) {
+    const query = DB.builder()
+      .select()
+      .field('image')
+      .from('registration')
+      .where('id = ?', session.user_id)
+      .toParam();
+     DB.executeQuery(query, (error, results) => {
+      if (error) {
+        next(error);
+        return;
+      }
+      res.render('edit', { res: results.rows });
+    });
+  } else {
+    res.render('login');
+  }
+});
+router.post('/editprofile', upload.single('file'), (req, res, next) => {
 
-  let photo = '';
+   let photo = '';
   if (req.file) {
     photo = req.file.filename;
   } else {
@@ -352,10 +368,29 @@ router.post('/edit', upload.single('file'), (req, res, next) => {
   const query = DB.builder()
     .update()
     .table('registration')
+    .set('image', photo)
+    .where('id = ? ', req.session.user_id)
+    .toParam();
+   DB.executeQuery(query, (error, results) => {
+      if (error) {
+        next(error);
+        return;
+      }
+      res.redirect('/home');
+    });
+})
+router.post('/edit', upload.single('file'), (req, res, next) => {
+  console.log('------>>>>>hhhhhhh');
+  const username = req.body.editusername;
+  const password = req.body.editpassword;
+  const email = req.body.editemail;
+  const session = req.session;
+  const query = DB.builder()
+    .update()
+    .table('registration')
     .set('username', username)
     .set('password', password)
     .set('email', email)
-    .set('image', photo)
     .where('id = ?', session.user_id)
     .toParam();
   DB.executeQuery(query, (error, results) => {
