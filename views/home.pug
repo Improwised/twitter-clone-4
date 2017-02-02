@@ -5,33 +5,33 @@ block content
     include header.pug
       .row.profile
         .col-sm-3
-          .profile-sidebar
-            .profile-userpic
-              img.img-responsive(src='http://images.all-free-download.com/images/wallpapers_large/orange_flower_wallpaper_flowers_nature_wallpaper_1665.jpg', alt='')
-              | &#x9;&#x9;&#x9;&#x9;&#x9;
-            .profile-usertitle
-              .profile-usertitle-name
-                each user in username
-                  span= user.username
-                  | &#x9;&#x9;&#x9;&#x9;&#x9;
+          each user in users
+            .profile-sidebar
+              .profile-userpic
+                img.img-responsive(src='images/'+user.image, alt='')
+                | &#x9;&#x9;&#x9;&#x9;&#x9;
+              .profile-usertitle
+                .profile-usertitle-name
+                    span= user.username
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;
 
-            .profile-usermenu
-              ul.nav
-                li.active
-                  a(href='/home')
-                    i.glyphicon.glyphicon-home
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Home
-                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-                li
-                  a(href='/profile')
-                    i.glyphicon.glyphicon-user
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Profile
-                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-                li
-                  a(href='/twit')
-                    i.glyphicon.glyphicon-pencil
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Tweet
-                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              .profile-usermenu
+                ul.nav
+                  li.active
+                    a(href='/home')
+                      i.glyphicon.glyphicon-home
+                      | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Home
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    a(href='/profile')
+                      i.glyphicon.glyphicon-user
+                      | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Profile
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    a(href='/twit')
+                      i.glyphicon.glyphicon-pencil
+                      | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Tweet
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
         .col-sm-6
           .row
             each cell in twits
@@ -43,14 +43,14 @@ block content
                   .form-top-right
                       span= cell.time
                 hr
-                .form-bottom
+                .form-bottom#tweet
                   span= cell.tweet_text
         .col-sm-3
           h4 May People You Know ???
             each cell in follows
               .profile-sidebar
                 .profile-userpic
-                  img.img-responsive(src='http://images.all-free-download.com/images/wallpapers_large/orange_flower_wallpaper_flowers_nature_wallpaper_1665.jpg', alt='')
+                  img.img-responsive(src='images/'+cell.image, alt='')
                   | &#x9;&#x9;&#x9;&#x9;&#x9;
                 .profile-usertitle
                   .profile-usertitle-name

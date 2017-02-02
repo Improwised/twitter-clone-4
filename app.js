@@ -55,22 +55,6 @@ app.use('/profile', routes);
 app.use('/edit', routes);
 app.use('/logout', routes);
 
-app.use(expressValidator({
-  errorFormatter: (param, msg, value) => {
-    const namespace = param.split('.'),
-      root = namespace.shift(),
-      formParam = root;
-
-    while (namespace.length) {
-      formParam += '[' + namespace.shift() + ']';
-    }
-    return {
-      param : formParam,
-      msg   : msg,
-      value : value,
-    };
-  };
-}));
 // Catch 404 errors
 // Forwarded to the error handlers
 app.use((req, res, next) => {

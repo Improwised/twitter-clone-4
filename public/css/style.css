@@ -63,13 +63,16 @@
  text-align: right;
 }
 .form-bottom {
- padding: 25px 25px 30px 25px;
+ padding: 10px 10px 10px 20px;
  background: #5884aa ;
  -moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
  text-align: left;
- margin-bottom: 50px;
-}
+ margin-bottom: 30px;
 
+}
+#tweet{
+  color: #ffffff;
+}
 .form-bottom form textarea {
  height: 100px;
 }

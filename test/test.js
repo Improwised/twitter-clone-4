@@ -2,8 +2,7 @@ const request = require('supertest');
 
 const server = require('../app');
 
-let describe;
-let it;
+const should = require('should');
 
 describe('index', () => {
   describe('GET /', () => {
@@ -93,18 +92,20 @@ describe('POST /registration', () => {
     const registration = {
       username: 'abc',
       email: 'abc@gmail.com',
-      password: 'password',
+      password: '243',
+      image: 'sun.jpg',
+
     };
     request(server)
       .post('/registration')
       .send(registration)
-      .expect(200)
+      .expect(302)
       .expect({})
       .end((err, res) => {
         if (err) {
           done(err);
         } else {
-          res.status.should.be.equal(200);
+          res.status.should.be.equal(302);
           done();
         }
       });
@@ -133,10 +134,24 @@ describe('POST /login', () => {
   });
 });
 
+describe('GET /twit', () => {
+  it('should return a edit profile page', (done) => {
+    request(server)
+      .get('/twit')
+      .expect('Content-type', 'text/html; charset=utf-8')
+      .expect(200)
+      .end((err, res) => {
+        res.status.should.be.equal(200);
+        done();
+      });
+  });
+});
+
 describe('POST /twit', () => {
   it('user can tweet', (done) => {
     const tw = {
-      tweet_text : 'hello',
+      tweet_text: 'hello',
+      user_id: '222',
     };
     request(server)
       .post('/twit')
@@ -154,3 +169,94 @@ describe('POST /twit', () => {
   });
 });
 
+describe('profile', () => {
+  describe('GET /edit', () => {
+    it('should return a edit profile page', (done) => {
+      request(server)
+        .get('/edit')
+        .expect('Content-type', 'text/html; charset=utf-8')
+        .expect(200)
+        .end((err, res) => {
+          res.status.should.be.equal(200);
+          done();
+        });
+    });
+  });
+});
+describe('POST /edit', () => {
+  it('user can edit their profile', (done) => {
+    const edit = {
+      username: 'abcd',
+      email: 'abcd@gmail.com',
+      password: '123',
+
+    };
+    request(server)
+      .post('/edit')
+      .send(edit)
+      .expect(302)
+      .expect({})
+      .end((err, res) => {
+        if (err) {
+          done(err);
+        } else {
+          res.status.should.be.equal(302);
+          done();
+        }
+      });
+  });
+});
+describe('POST /follow', () => {
+  it('user can follow other user', (done) => {
+    const follower = {
+      login_user: '1',
+      follower_id: '12',
+
+    };
+    request(server)
+      .post('/follow')
+      .send(follower)
+      .expect(302)
+      .expect({})
+      .end((err, res) => {
+        if (err) {
+          done(err);
+        } else {
+          res.status.should.be.equal(302);
+          done();
+        }
+      });
+  });
+});
+describe('POST /unfollow', () => {
+  it('user can follow other user', (done) => {
+    const unfollower = {
+      id_f: '12',
+    };
+    request(server)
+      .post('/unfollow')
+      .send(unfollower)
+      .expect(302)
+      .expect({})
+      .end((err, res) => {
+        if (err) {
+          done(err);
+        } else {
+          res.status.should.be.equal(302);
+          done();
+        }
+      });
+  });
+});
+describe('GET /logout', () => {
+  it('should return a main index page', (done) => {
+    request(server)
+      .get('/logout')
+      .expect('Content-type', 'text/html; charset=utf-8')
+      .expect(302)
+      .end((err, res) => {
+        res.status.should.be.equal(302);
+        done();
+      });
+  });
+});
