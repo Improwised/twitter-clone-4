@@ -12,6 +12,10 @@ describe('index', () => {
         .expect('Content-type', 'text/html; charset=utf-8')
         .expect(200)
         .end((err, res) => {
+          if (err) {
+            return done(err);
+          }
+
           res.status.should.be.equal(200);
           done();
         });
@@ -102,6 +106,7 @@ describe('POST /registration', () => {
       .expect(302)
       .end((err, res) => {
         if (err) {
+          console.log(err);
           done(err);
         } else {
           res.status.should.be.equal(302);
