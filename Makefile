@@ -13,3 +13,5 @@ lint:
 	jsonlint -q -c ${JSON_SRC}
 	eslint ${JS_SRC} ${ESLINT_ARGS}
 
+test:
+	PGDB_DB=testing mocha
