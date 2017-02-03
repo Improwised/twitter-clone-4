@@ -6,7 +6,7 @@ const should = require('should');
 
 describe('index', () => {
   describe('GET /', () => {
-    it('should return a homepage', (done) => {
+    it('should return a indexpage', (done) => {
       request(server)
         .get('/')
         .expect('Content-type', 'text/html; charset=utf-8')
@@ -39,7 +39,7 @@ describe('GET /login', () => {
 describe('GET /registration', () => {
   it('should return registration page', (done) => {
     request(server)
-    .get('/')
+    .get('/registration')
     .expect('Content-type', 'text/html; charset=utf-8')
     .expect(200)
     .end((err, res) => {
@@ -100,7 +100,6 @@ describe('POST /registration', () => {
       .post('/registration')
       .send(registration)
       .expect(302)
-      .expect({})
       .end((err, res) => {
         if (err) {
           done(err);
@@ -114,13 +113,13 @@ describe('POST /registration', () => {
 
 describe('POST /login', () => {
   it('user can register', (done) => {
-    const registration = {
+    const login = {
       email: 'abc@gmail.com',
       password: '123',
     };
     request(server)
       .post('/login')
-      .send(registration)
+      .send(login)
       .expect(302)
       .expect({})
       .end((err, res) => {
