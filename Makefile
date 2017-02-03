@@ -7,7 +7,7 @@ SHELL := /bin/bash
 JS_SRC = $(shell find . -type f -name '*.js' ! -path './node_modules/*')
 JSON_SRC = $(shell find . -type f -name '*.json' ! -path './node_modules/*')
 
-.PHONY: lint test
+.PHONY: lint test test-ci
 
 lint:
 	jsonlint -q -c ${JSON_SRC}
@@ -16,14 +16,17 @@ lint:
 install:
 	npm i
 
+test-ci:
+	PORT=3000 \
+	NODE_ENV=test \
+	PGDB_TCP_PORT=5432 \
+	PGDB_TCP_HOST=127.0.0.1 \
+	PGDB_USER=postgres \
+	PGDB_PASS=hello \
+	PGDB_DB=testing \
+	make test
+
 test:
-	export PORT=3000
-	export NODE_ENV=test
-	export PGDB_TCP_PORT=5432
-	export PGDB_TCP_HOST=127.0.0.1
-	export PGDB_USER=postgres
-	export PGDB_PASS=hello
-	export PGDB_DB=testing
 	mocha
 
 run:
