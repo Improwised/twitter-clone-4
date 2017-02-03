@@ -103,7 +103,6 @@ describe('POST /registration', () => {
     request(server)
       .post('/registration')
       .send(registration)
-      .expect(302)
       .end((err, res) => {
         if (err) {
           console.log(err);
