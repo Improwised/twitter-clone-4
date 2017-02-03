@@ -105,7 +105,7 @@ describe('POST /registration', () => {
       .send(registration)
       .end((err, res) => {
         if (err) {
-          console.log(err);
+          console.log(res);
           done(err);
         } else {
           res.status.should.be.equal(302);
