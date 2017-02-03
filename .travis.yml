@@ -5,5 +5,5 @@ node_js:
 services:
   - postgresql
 before_script:
-  - psql -c 'create database testing;' -U nidhi -w
+  - psql -c 'create database testing;' -U postgres -w
   - psql -f 'scripttest.sql'

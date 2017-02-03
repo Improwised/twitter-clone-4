@@ -15,14 +15,14 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -35,7 +35,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: follow; Type: TABLE; Schema: public; Owner: nidhi
+-- Name: follow; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE follow (
@@ -45,10 +45,10 @@ CREATE TABLE follow (
 );
 
 
-ALTER TABLE follow OWNER TO nidhi;
+ALTER TABLE follow OWNER TO postgres;
 
 --
--- Name: follow_id_f_seq; Type: SEQUENCE; Schema: public; Owner: nidhi
+-- Name: follow_id_f_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE follow_id_f_seq
@@ -59,17 +59,17 @@ CREATE SEQUENCE follow_id_f_seq
     CACHE 1;
 
 
-ALTER TABLE follow_id_f_seq OWNER TO nidhi;
+ALTER TABLE follow_id_f_seq OWNER TO postgres;
 
 --
--- Name: follow_id_f_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nidhi
+-- Name: follow_id_f_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE follow_id_f_seq OWNED BY follow.id_f;
 
 
 --
--- Name: registration; Type: TABLE; Schema: public; Owner: nidhi
+-- Name: registration; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE registration (
@@ -81,10 +81,10 @@ CREATE TABLE registration (
 );
 
 
-ALTER TABLE registration OWNER TO nidhi;
+ALTER TABLE registration OWNER TO postgres;
 
 --
--- Name: registration_id_seq; Type: SEQUENCE; Schema: public; Owner: nidhi
+-- Name: registration_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE registration_id_seq
@@ -95,17 +95,17 @@ CREATE SEQUENCE registration_id_seq
     CACHE 1;
 
 
-ALTER TABLE registration_id_seq OWNER TO nidhi;
+ALTER TABLE registration_id_seq OWNER TO postgres;
 
 --
--- Name: registration_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nidhi
+-- Name: registration_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE registration_id_seq OWNED BY registration.id;
 
 
 --
--- Name: twit; Type: TABLE; Schema: public; Owner: nidhi
+-- Name: twit; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE twit (
@@ -116,10 +116,10 @@ CREATE TABLE twit (
 );
 
 
-ALTER TABLE twit OWNER TO nidhi;
+ALTER TABLE twit OWNER TO postgres;
 
 --
--- Name: twit_id_seq; Type: SEQUENCE; Schema: public; Owner: nidhi
+-- Name: twit_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE twit_id_seq
@@ -130,38 +130,38 @@ CREATE SEQUENCE twit_id_seq
     CACHE 1;
 
 
-ALTER TABLE twit_id_seq OWNER TO nidhi;
+ALTER TABLE twit_id_seq OWNER TO postgres;
 
 --
--- Name: twit_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nidhi
+-- Name: twit_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE twit_id_seq OWNED BY twit.id;
 
 
 --
--- Name: follow id_f; Type: DEFAULT; Schema: public; Owner: nidhi
+-- Name: follow id_f; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY follow ALTER COLUMN id_f SET DEFAULT nextval('follow_id_f_seq'::regclass);
 
 
 --
--- Name: registration id; Type: DEFAULT; Schema: public; Owner: nidhi
+-- Name: registration id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY registration ALTER COLUMN id SET DEFAULT nextval('registration_id_seq'::regclass);
 
 
 --
--- Name: twit id; Type: DEFAULT; Schema: public; Owner: nidhi
+-- Name: twit id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY twit ALTER COLUMN id SET DEFAULT nextval('twit_id_seq'::regclass);
 
 
 --
--- Data for Name: follow; Type: TABLE DATA; Schema: public; Owner: nidhi
+-- Data for Name: follow; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY follow (id_f, login_user, follower_id) FROM stdin;
@@ -169,14 +169,14 @@ COPY follow (id_f, login_user, follower_id) FROM stdin;
 
 
 --
--- Name: follow_id_f_seq; Type: SEQUENCE SET; Schema: public; Owner: nidhi
+-- Name: follow_id_f_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('follow_id_f_seq', 7, true);
 
 
 --
--- Data for Name: registration; Type: TABLE DATA; Schema: public; Owner: nidhi
+-- Data for Name: registration; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY registration (id, username, password, email, image) FROM stdin;
@@ -184,14 +184,14 @@ COPY registration (id, username, password, email, image) FROM stdin;
 
 
 --
--- Name: registration_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nidhi
+-- Name: registration_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('registration_id_seq', 7, true);
 
 
 --
--- Data for Name: twit; Type: TABLE DATA; Schema: public; Owner: nidhi
+-- Data for Name: twit; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY twit (id, tweet_text, "time", user_id) FROM stdin;
@@ -199,14 +199,14 @@ COPY twit (id, tweet_text, "time", user_id) FROM stdin;
 
 
 --
--- Name: twit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nidhi
+-- Name: twit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('twit_id_seq', 7, true);
 
 
 --
--- Name: follow follow_pkey; Type: CONSTRAINT; Schema: public; Owner: nidhi
+-- Name: follow follow_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY follow
@@ -214,7 +214,7 @@ ALTER TABLE ONLY follow
 
 
 --
--- Name: registration registration_pkey; Type: CONSTRAINT; Schema: public; Owner: nidhi
+-- Name: registration registration_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY registration
@@ -222,7 +222,7 @@ ALTER TABLE ONLY registration
 
 
 --
--- Name: twit twit_pkey; Type: CONSTRAINT; Schema: public; Owner: nidhi
+-- Name: twit twit_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY twit
