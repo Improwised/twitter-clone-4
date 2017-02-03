@@ -1,0 +1,271 @@
+/***
+User Profile Sidebar by @keenthemes
+A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
+Licensed under MIT
+***/
+
+/*body {
+  background: #F1F3FA;
+}
+*/
+/* Profile container */
+.container{
+  border: 1px solid #f2f2f2;
+  margin-bottom: 5px;
+}
+h4{
+  color: #23527c;
+}
+.profile {
+  margin: 20px 0px;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 20px 0 10px 0;
+  background: #fff;
+}
+
+.profile-userpic {
+  float: left;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.profile-userpic img {
+  float: left;
+  margin-left: 50px ;
+  width: 50%;
+  height: 20%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+.profile-usertitle {
+  text-align: left;
+  margin-top: 180px;
+  margin-left: 50px;
+}
+
+.profile-usertitle-name {
+  color: #23527c;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+  margin-left: 50px;
+
+}
+
+/*.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  margin-left: 20px;
+}*/
+p{
+  color: #ffffff;
+}
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profile-userbuttons .btn {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 15px;
+  margin-right: 5px;
+}
+
+.profile-userbuttons .btn:last-child {
+  margin-right: 0px;
+}
+
+.profile-usermenu {
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
+.profile-usermenu ul li {
+  border-bottom: 1px solid #f0f4f7;
+}
+
+.profile-usermenu ul li:last-child {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li a {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.profile-usermenu ul li a i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.profile-usermenu ul li a:hover {
+  background-color: #fafcfd;
+  color: #5b9bd1;
+}
+
+.profile-usermenu ul li.active {
+  border-bottom: none;
+}
+
+.profile-usermenu ul li.active a {
+  color: #5b9bd1;
+  background-color: #f6f9fb;
+  border-left: 2px solid #5b9bd1;
+  margin-left: -2px;
+}
+ /*for profile page*/
+
+ @import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,400,700);
+
+body{
+    background:#e9eaed;
+  }
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Open Sans Condensed', sans-serif, sans-serif;
+}
+
+#header{
+  border:1px solid #ddd;
+  margin-bottom:20px;
+  }
+.navbar{
+  border-radius:0;
+  margin-bottom:0;
+  border:none;
+  font-family: 'Open Sans Condensed', sans-serif, sans-serif;
+
+  }
+
+
+.navbar-brand{
+width:160px;
+height:160px;
+float:left;
+padding:0;
+margin-top:-130px;
+overflow:hidden;
+border:3px solid #eee;
+margin-left:15px;
+background:#333;
+text-align:center;
+line-height:160px;
+color:#fff !important;
+font-size:2em;
+    -webkit-transition:  all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition:  all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out ;
+
+  }
+
+
+.site-name{
+  color:#fff;
+  font-size:2.4em;
+  float:left;
+  margin-top:-65px !important;
+  margin-left:15px;
+        font-family: 'Open Sans Condensed', sans-serif, sans-serif;
+
+  }
+.site-description{
+  color:#fff;
+  font-size:1.3em;
+  float:left;
+  margin-top:-30px !important;
+  margin-left:15px;
+  }
+
+.main-menu{
+  position:absolute;
+  left:190px;
+  }
+
+.slider, .carousel{
+  max-height:360px;
+  overflow:hidden;
+  }
+
+.carousel-control .fa-angle-left,
+.carousel-control .fa-angle-right {
+position: absolute;
+top: 50%;
+font-size:2em;
+z-index: 5;
+display: inline-block;
+}
+
+.carousel-control{
+  background-color:transparent;
+  background-image:none !important;
+  }
+
+.carousel-control:hover,
+.carousel-control:focus {
+  color: #fff;
+  text-decoration: none;
+  background-color:transparent !important;
+  background-image:none !important;
+  outline: 0;
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+.navbar-brand{
+    max-width: 100px;
+  max-height:100px;
+  float:left;
+  margin-top:-65px;
+  margin-left:15px;
+  -webkit-transition:  all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition:  all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out ;
+  }
+
+.navbar{
+  border-radius:0;
+  margin-bottom:0;
+  border:none;
+  }
+.main-menu{
+  left:0;
+  position:relative;
+  }
+
+@media (max-width: 490px) {
+  .site-name{
+  color:#fff;
+  font-size:1.5em;
+  float:left;
+  line-height:20px;
+  margin-top:-100px !important;
+  margin-left:125px;
+  }
+.site-description{
+  color:#fff;
+  font-size:1.3em;
+  float:left;
+  margin-top:-80px !important;
+  margin-left:125px;
+  }
+  }
+
+

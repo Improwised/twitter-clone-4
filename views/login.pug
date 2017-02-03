@@ -1,0 +1,54 @@
+extends ./layouts/main.pug
+
+block content
+  //- h1= title
+  //- .nav.nav-tabs
+  //-   span
+  //-   .glyphicon.glyphicon-heart
+  //-   Home
+
+  .container
+    .menu
+      ul.nav.nav-tabs
+        li
+          #iconforlogin.glyphicon.glyphicon-heart
+
+    .row
+      .col-sm-6.col-sm-offset-3.form-box
+        .form-top
+          .form-top-left
+            h3 Login to Twitter-Clone
+          .form-top-right
+            i.fa.fa-key.fa-4x
+        .form-bottom
+          form(action="/login" method="post")
+            .form-group
+              label.sr-only(for="form-username") Email
+              input.form-control(type="text" name= "email" placeholder="Email..." required = '')
+              -if(errors)
+                each error in errors
+                  -if(error.param == 'email')
+                    p= error.msg
+            .form-group
+              label.sr-only(for="form-password") Password
+              input.form-password.form-control(type="password" name= "password" placeholder="Password..." required = '')
+              -if(errors)
+                each error in errors
+                  -if(error.param == 'password')
+                    p= error.msg
+            .form-group
+              button.btn(type="submit") Sign in !
+              input(type="checkbox" checked="checked" name="Remember_me" value="Remember_me" required = '')
+              label  &nbsp &nbsp Remember me
+              a(href="/forgot") &nbsp &nbsp Forgot Password..??
+
+            .form-group
+              label New to Twitter-clone?
+              a(href="/registration") &nbsp &nbsp Sign Up Now..??
+
+
+
+
+
+
+

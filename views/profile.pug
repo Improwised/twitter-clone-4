@@ -1,0 +1,101 @@
+extends ./layouts/main.pug
+
+block content
+  .container
+    .row
+      .col-md-12
+        header#header
+          .slider
+            #carousel-example-generic.carousel.slide(data-ride='carousel')
+              .carousel-inner(role='listbox')
+                .item.active
+                  img(src='images/image.jpeg')
+
+          nav.navbar.navbar-default
+            .navbar-header
+              each user in users
+                button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#mainNav')
+                  span.sr-only Toggle navigation
+                a.navbar-brand(href='#')
+                  img.img-responsive(src='images/'+ user.image)
+                span.site-name
+                  span= user.username
+            #mainNav.collapse.navbar-collapse
+              ul.nav.main-menu.navbar-nav
+                li
+                  a(href='/home')
+                    i.fa.fa-home
+                    |  HOME
+                li
+                  a(href='/edit')
+                    i.fa.fa-user
+                    |  Edit
+                li
+                  a(href='/logout')
+                    i.fa.fa-sign-out
+                    |  Logout
+              ul.nav.navbar-nav.navbar-right
+                li
+                  a(href='#')
+                    i.fa.fa-facebook
+                li
+                  a(href='#')
+                    i.fa.fa-twitter
+                li
+                  a(href='#')
+                    i.fa.fa-google-plus
+      .col-sm-3
+        .profile-sidebar
+          .profile-usermenu
+              ul.nav
+                li.active
+                  a(href='/home')
+                    i.glyphicon.glyphicon-home
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Home
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li
+                  a(href='/edit')
+                    i.glyphicon.glyphicon-user
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Edit Profile
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li
+                  a(href='/twit')
+                    i.glyphicon.glyphicon-pencil
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Tweet
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li
+                  a(href='/logout')
+                    i.glyphicon.glyphicon-log-out
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Logout
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+      .col-sm-6
+        .row
+          each cell1 in twits
+            .form-box
+              .form-top
+                .form-top-left
+                  h3
+                    span= cell1.username
+                .form-top-right
+                    span= cell1.time
+              hr
+              .form-bottom#tweet
+                span= cell1.tweet_text
+      .col-sm-3
+        h4 Follower.
+        each cell in follows
+          div.clearfix
+            .profile-sidebar
+                .profile-userpic
+                  img.img-responsive(src='images/'+cell.image, alt='')
+                | &#x9;&#x9;&#x9;&#x9;&#x9;
+                .profile-usertitle
+                  .profile-usertitle-name
+                    span= cell.username
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;
+            form(action='/unfollow' method='post')
+              .profile-userbuttons
+                input(type='hidden' name='follower' value = cell.id_f)
+                button.btn.btn-primary.btn-sm(type='submit') Unfollow
+
+

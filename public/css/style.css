@@ -1,0 +1,115 @@
+#iconforlogin {
+   font-size: 20px;
+   color:#23527c ;
+   margin-top: 10px;
+   margin-left: 10px;
+   padding-bottom: 10px;
+}
+
+.nav-tabs{
+ border-bottom: 2px solid #23527c ;
+ padding-top: 30px;
+}
+
+.menu ul{
+ margin-bottom: auto;
+ padding-bottom: 0px;
+ background: linear-gradient(#23527c,#ffffff);
+}
+
+.menu ul li {
+ margin-left: 800px;
+  font-size: 15px;
+}
+
+
+.container
+{
+
+ margin-top: 10px;
+
+}
+
+.form-box {
+ margin-top: 35px;
+ color: #23527c ;
+}
+
+.form-top {
+ overflow: hidden;
+ padding: 0 20px 15px 25px;
+ background: #fff;
+ moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
+ text-align: left;
+}
+
+.form-top-left {
+ float: left;
+ width: 75%;
+ padding-top: 25px;
+
+}
+
+.form-top-left h3 { margin-top: 0; }
+
+.form-top-right {
+ float: left;
+ width: 20%;
+ padding-top: 0px;
+ margin-top: 2px;
+ font-size: 15px;
+ color: #23527c ;
+/*  line-height: 100px;*/
+ text-align: right;
+}
+.form-bottom {
+ padding: 10px 10px 10px 20px;
+ background: #5884aa ;
+ -moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
+ text-align: left;
+ margin-bottom: 30px;
+
+}
+#tweet{
+  color: #ffffff;
+}
+.form-bottom form textarea {
+ height: 100px;
+}
+
+.form-bottom form button.btn {
+ width: 40%;
+ background-color: white;
+}
+.form-bottom form button a {
+  color: #23527c;
+}
+.form-bottom form .input-error {
+ border-color: #4aaf51 ;
+}
+ .form-right{
+  float: right;
+}
+form a{
+ color: white;
+ text-decoration: underline;
+}
+form a:hover{
+ color: black;
+}
+form label{
+ color: white;
+}
+.well{
+  background-color: #ffffff;
+}
+.form-top-left span{
+  color: #23527c;
+}
+hr{
+  color: black;
+}
+/*.form-bottom {
+  background-color: White;
+  color:#23527c;
+}*/

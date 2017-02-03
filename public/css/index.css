@@ -1,0 +1,110 @@
+/*
+ * Globals
+ */
+
+/* Links */
+/*a,
+a:focus,
+a:hover {
+  color: #fff;
+}*/
+
+/* Custom default button */
+
+#login{
+  color: #ffffff;
+
+}
+#login a:hover{
+  color: #23527c;
+}
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: 1px solid #fff;
+}
+
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  background-color: #ffffff;
+}
+body {
+  color: #fff;
+  text-align: center;
+  text-shadow: #23527c;
+}
+
+/* Extra markup and styles for table-esque vertical and horizontal centering
+
+/* Padding for spacing */
+.inner.cover {
+  padding: 30px;
+  text-align: center;
+  margin: 300px 100px 100px 100px;
+}
+/*.inner {
+  /*padding: 30px;*/
+ /* text-align: center;
+  margin: 100px 100px 100px 100px;
+}*
+
+/*
+ * Header
+ */
+
+
+/*
+ * Cover
+ */
+h1{
+  color: #23527c;
+}
+.inner.cover p{
+  color: #23527c;
+}
+.cover {
+  padding: 30px 20px;
+}
+.cover .btn-lg {
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+
+/*for header */
+.header ul li{
+  float: left;
+  margin-left: 0px;
+  font-size: 20px;
+}
+.color{
+  background: #ffffff;
+}
+.header{
+  font-size: 20px;
+}
+
+
+/*a{
+  color: #23527c;
+}
+a:hover{
+  text-decoration: none;*/
+
+/*}*/
+#icon{
+  float: right;
+
+}
+i{
+  color: #23527c;
+}
