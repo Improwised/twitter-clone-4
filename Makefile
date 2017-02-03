@@ -16,8 +16,15 @@ lint:
 install:
 	npm i
 
-test:install
-	PGDB_DB=testing mocha
+test:
+	export PORT=3000
+	export NODE_ENV=test
+	export PGDB_TCP_PORT=5432
+	export PGDB_TCP_HOST=127.0.0.1
+	export PGDB_USER=postgres
+	export PGDB_PASS=hello
+	export PGDB_DB=testing
+	mocha
 
 run:
 	node app
