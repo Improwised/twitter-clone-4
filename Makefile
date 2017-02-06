@@ -16,7 +16,7 @@ lint:
 install:
 	npm i
 
-test-ci:
+test-ci: lint
 	make test
 
 test:
