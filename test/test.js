@@ -1,4 +1,4 @@
-let request = require('supertest');
+const request = require('supertest');
 
 const server = require('../app');
 // request = request('http://localhost:3000');
