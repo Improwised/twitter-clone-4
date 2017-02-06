@@ -1,5 +1,9 @@
 # Twitter-clone-4
-    twitter-clone-4 is a web-application which provide user interface . This is build using Node.js , Express and PostgresSQL.
+
+[![Build Status](https://travis-ci.org/Improwised/twitter-clone-4.svg?branch=master)](https://travis-ci.org/Improwised/twitter-clone-4)
+
+twitter-clone-4 is a web-application which provide user interface . This is build using Node.js , Express and PostgresSQL.
+
 ## Prerequisites
 * [Node.js >= 4.3.x/NPM](http://nodejs.org/download/)
 * [PostgreSQL](http://www.postgresql.org/download/)

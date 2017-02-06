@@ -1,17 +1,21 @@
-const request = require('supertest');
+let request = require('supertest');
 
-const server = require('../app');
-
+// const server = require('../app');
+request = request('http://localhost:3000');
 const should = require('should');
 
 describe('index', () => {
   describe('GET /', () => {
-    it('should return a homepage', (done) => {
-      request(server)
+    it('should return a indexpage', (done) => {
+      request
         .get('/')
         .expect('Content-type', 'text/html; charset=utf-8')
         .expect(200)
         .end((err, res) => {
+          if (err) {
+            done(err);
+          }
+
           res.status.should.be.equal(200);
           done();
         });
@@ -21,7 +25,7 @@ describe('index', () => {
 
 describe('GET /login', () => {
   it('should return login page', (done) => {
-    request(server)
+    request
     .get('/login')
     .expect('Content-type', 'text/html; charset=utf-8')
     .expect(200)
@@ -38,8 +42,8 @@ describe('GET /login', () => {
 
 describe('GET /registration', () => {
   it('should return registration page', (done) => {
-    request(server)
-    .get('/')
+    request
+    .get('/registration')
     .expect('Content-type', 'text/html; charset=utf-8')
     .expect(200)
     .end((err, res) => {
@@ -55,7 +59,7 @@ describe('GET /registration', () => {
 
 describe('GET /home', () => {
   it('return home page', (done) => {
-    request(server)
+    request
     .get('/home')
     .expect('Content-type', 'text/html; charset=utf-8')
     .expect(200)
@@ -72,7 +76,7 @@ describe('GET /home', () => {
 
 describe('GET /profile', () => {
   it(' return profile page', (done) => {
-    request(server)
+    request
     .get('/profile')
     .expect('Content-type', 'text/html; charset=utf-8')
     .expect(200)
@@ -96,11 +100,9 @@ describe('POST /registration', () => {
       image: 'sun.jpg',
 
     };
-    request(server)
+    request
       .post('/registration')
       .send(registration)
-      .expect(302)
-      .expect({})
       .end((err, res) => {
         if (err) {
           done(err);
@@ -114,13 +116,13 @@ describe('POST /registration', () => {
 
 describe('POST /login', () => {
   it('user can register', (done) => {
-    const registration = {
+    const login = {
       email: 'abc@gmail.com',
       password: '123',
     };
-    request(server)
+    request
       .post('/login')
-      .send(registration)
+      .send(login)
       .expect(302)
       .expect({})
       .end((err, res) => {
@@ -136,7 +138,7 @@ describe('POST /login', () => {
 
 describe('GET /twit', () => {
   it('should return a edit profile page', (done) => {
-    request(server)
+    request
       .get('/twit')
       .expect('Content-type', 'text/html; charset=utf-8')
       .expect(200)
@@ -153,7 +155,7 @@ describe('POST /twit', () => {
       tweet_text: 'hello',
       user_id: '222',
     };
-    request(server)
+    request
       .post('/twit')
       .send(tw)
       .expect(302)
@@ -172,7 +174,7 @@ describe('POST /twit', () => {
 describe('profile', () => {
   describe('GET /edit', () => {
     it('should return a edit profile page', (done) => {
-      request(server)
+      request
         .get('/edit')
         .expect('Content-type', 'text/html; charset=utf-8')
         .expect(200)
@@ -191,7 +193,7 @@ describe('POST /edit', () => {
       password: '123',
 
     };
-    request(server)
+    request
       .post('/edit')
       .send(edit)
       .expect(302)
@@ -210,7 +212,7 @@ describe('POST /edit', () => {
 describe('profile', () => {
   describe('GET /editprofile', () => {
     it('should return a update profile photo page', (done) => {
-      request(server)
+      request
         .get('/editprofile')
         .expect('Content-type', 'text/html; charset=utf-8')
         .expect(200)
@@ -228,7 +230,7 @@ describe('POST /editprofile', () => {
       image: 'sun.jpg',
 
     };
-    request(server)
+    request
       .post('/editprofile')
       .send(editprofile)
       .expect(302)
@@ -251,7 +253,7 @@ describe('POST /follow', () => {
       follower_id: '12',
 
     };
-    request(server)
+    request
       .post('/follow')
       .send(follower)
       .expect(302)
@@ -271,7 +273,7 @@ describe('POST /unfollow', () => {
     const unfollower = {
       id_f: '12',
     };
-    request(server)
+    request
       .post('/unfollow')
       .send(unfollower)
       .expect(302)
@@ -288,7 +290,7 @@ describe('POST /unfollow', () => {
 });
 describe('GET /logout', () => {
   it('should return a main index page', (done) => {
-    request(server)
+    request
       .get('/logout')
       .expect('Content-type', 'text/html; charset=utf-8')
       .expect(302)

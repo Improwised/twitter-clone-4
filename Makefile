@@ -7,9 +7,20 @@ SHELL := /bin/bash
 JS_SRC = $(shell find . -type f -name '*.js' ! -path './node_modules/*')
 JSON_SRC = $(shell find . -type f -name '*.json' ! -path './node_modules/*')
 
-.PHONY: lint test
+.PHONY: lint test test-ci
 
 lint:
 	jsonlint -q -c ${JSON_SRC}
 	eslint ${JS_SRC} ${ESLINT_ARGS}
 
+install:
+	npm i
+
+test-ci: lint
+	make test
+
+test:
+	mocha
+
+run:
+	node app
