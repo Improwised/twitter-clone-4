@@ -87,6 +87,9 @@
 .form-bottom form .input-error {
  border-color: #4aaf51 ;
 }
+ .form-right{
+  float: right;
+}
 form a{
  color: white;
  text-decoration: underline;
