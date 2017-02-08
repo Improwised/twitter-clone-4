@@ -18,10 +18,13 @@
 }
 
 .menu ul li {
+ margin-left: 500px;
+  font-size: 15px;
+}
+.menu.iconr ul li {
  margin-left: 800px;
   font-size: 15px;
 }
-
 
 .container
 {
